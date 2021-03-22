@@ -1,14 +1,14 @@
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Signup from './components/authComponents/Signup';
 
-import './App.css';
 
 function App() {
   return (
     <div className="site-container">
       <Header />
 
-        <h1>Hello World!</h1>
+        <Signup />
         
       <Footer />
     </div>
