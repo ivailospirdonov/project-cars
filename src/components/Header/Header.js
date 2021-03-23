@@ -1,4 +1,22 @@
-const Header = () => {
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import { Link, useHistory } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+
+export default function Header() {
+
+    const { logout, currentUser } = useAuth();
+    const history = useHistory();
+
+    async function handleLogout(e) {
+        e.preventDefault()
+        try {
+            await logout();
+            history.push('/login');
+        } catch {
+        }
+    }
+
     return (
         <>
             <header id="site-header">
@@ -8,10 +26,10 @@ const Header = () => {
                     </section>
                     <section className="nav-menu-wrapper">
                         <div className="nav-menu">
-                            <a href="/">Home</a>
-                            <a href="/">Login</a>
-                            <a href="/">Register</a>
-                            <a href="/">Logout</a>
+                            <Link to="/">Home</Link>
+                            {!currentUser &&  <Link to="/login">Log in</Link>}
+                            {!currentUser &&  <Link to="/signup">Sign Up</Link>}
+                            {currentUser &&  <Button variant="link" onClick={handleLogout}>Log out</Button>}
                         </div>
                     </section>
                 </nav>
@@ -26,6 +44,10 @@ const Header = () => {
                     margin-left: 15px;
                 }
 
+                .nav-menu > .btn{
+                    vertical-align: baseline;
+                }
+
                 .nav-menu-wrapper{
                     align-self: center;
                 }
@@ -33,5 +55,3 @@ const Header = () => {
         </>
     );
 };
-
-export default Header;
