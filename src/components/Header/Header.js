@@ -8,8 +8,7 @@ export default function Header() {
     const { logout, currentUser } = useAuth();
     const history = useHistory();
 
-    async function handleLogout(e) {
-        e.preventDefault()
+    async function handleLogout() {
         try {
             await logout();
             history.push('/login');
