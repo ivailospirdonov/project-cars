@@ -1,4 +1,4 @@
-import React , { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { isWebUri } from 'valid-url';
@@ -15,25 +15,25 @@ export default function CarCreate() {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault()
 
         if (!isWebUri(imageUrlRef.current.value)) {
             return setError('Not a valid url.');
         }
 
-        try{
+        try {
             setError('');
             setLoading(true);
             await create(
-                modelRef.current.value, 
-                yearRef.current.value, 
-                priceRef.current.value, 
-                imageUrlRef.current.value, 
+                modelRef.current.value,
+                yearRef.current.value,
+                priceRef.current.value,
+                imageUrlRef.current.value,
                 currentUser.uid
-                );
+            );
             history.push('/');
-        }catch{
+        } catch {
             setError('Failed to create a project car!')
         }
         setLoading(false);
