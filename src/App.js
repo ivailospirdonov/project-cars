@@ -5,6 +5,7 @@ import Signup from './components/authComponents/Signup';
 import Login from './components/authComponents/Login';
 import PrivateRoute from './components/authComponents/PrivateRoute';
 import ForgotPassword from './components/authComponents/ForgotPassword';
+import CarCreate from './components/carComponents/CarCreate';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './contexts/AuthContext';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -20,6 +21,7 @@ function App() {
             <div className="w-100" style={{ maxWidth: "400px" }}>
               <Switch>
                 <PrivateRoute exact path="/" component={Dashboard} />
+                <PrivateRoute exact path="/cars/create" component={CarCreate} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/login" component={Login} />
                 <Route path="/forgot-password" component={ForgotPassword} />
