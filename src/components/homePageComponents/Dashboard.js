@@ -12,9 +12,10 @@ export default function Dashboard() {
 
     useEffect(() => {
         async function getAllCars() {
-            let records = await getAll();
+            let records = await getAll(currentUser.uid);
             setCars(records);
         }
+
         getAllCars();
     }, []);
 
@@ -29,8 +30,13 @@ export default function Dashboard() {
                 </div>
             </div>
             <div>
-                {Object.entries(cars).map(car => 
-                    <CarCard key={car[0]} model={car[1].model} year={car[1].year} price={car[1].price} />)}
+                {cars.map(car =>
+                    <CarCard key={car[0]}
+                        model={car[1].model}
+                        year={car[1].year}
+                        price={car[1].price}
+                        imageUrl={car[1].imageUrl}
+                    />)}
             </div>
         </>
     )
