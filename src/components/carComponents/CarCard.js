@@ -9,7 +9,7 @@ export default function CarCard({ carId, model, year, price, imageUrl }) {
                 <h2>Car: {model}</h2>
                 <h4>Year: {year}</h4>
                 <h4>Price: {price}</h4>
-                <Link to={`/cars/${carId}`}>Details</Link>
+                <Link to={`/cars/details/${carId}`}>Details</Link>
             </li> 
         </div>
     )

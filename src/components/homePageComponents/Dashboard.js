@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-import { getAll } from '../../services/carsService';
+import { getAllCars } from '../../services/carsService';
 import { useAuth } from '../../contexts/AuthContext';
 import CarCard from '../carComponents/CarCard';
 
@@ -11,13 +11,13 @@ export default function Dashboard() {
     const { currentUser } = useAuth();
 
     useEffect(() => {
-        async function getAllCars() {
-            let records = await getAll(currentUser.uid);
+        async function getAllCurrentCars() {
+            let records = await getAllCars(currentUser.uid);
             setCars(records);
             
         }
 
-        getAllCars();
+        getAllCurrentCars();
     }, []);
     
     return (

@@ -21,7 +21,7 @@ function App() {
           <Header />
           <Switch>
             <PrivateRoute exact path="/" component={Dashboard} />
-            <PrivateRoute exact path="/cars/:carId" component={CarDetails} />
+            <PrivateRoute exact path="/cars/details/:carId" component={CarDetails} />
             <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
               <div className="w-100" style={{ maxWidth: "400px" }}>
                 <PrivateRoute exact path="/cars/create-car" component={CarCreate} />

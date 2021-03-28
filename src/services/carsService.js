@@ -1,6 +1,6 @@
 const databaseUrl = 'https://my-project-car-eb5d0-default-rtdb.firebaseio.com/';
 
-export async function getAll(id){
+export async function getAllCars(id){
     const records = await fetch(`${databaseUrl}cars.json`, {
         method: 'GET',
         headers: {
@@ -10,6 +10,18 @@ export async function getAll(id){
     .then(res => res.json())
     const ownedCars = Object.entries(records).filter( rec => rec[1].ownerId === id);
     return (ownedCars);
+}
+
+export async function getAllParts(id){
+    const records = await fetch(`${databaseUrl}cars/${id}/parts.json`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(res => res.json())
+    const validParts = Object.entries(records).filter( rec => rec[1].name);
+    return (validParts);
 }
 
 export async function getOneCar(id){
@@ -49,7 +61,6 @@ export async function addCarPart(id, name, price, shopUrl){
         price,
         shopUrl,
     };
-    
 
     return fetch(`${databaseUrl}cars/${id}/parts.json`, {
         method: 'POST',
