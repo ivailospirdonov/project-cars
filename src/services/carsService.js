@@ -87,3 +87,9 @@ export async function editCar(model, year, price, imageUrl, carId){
         body: JSON.stringify(car)
     })
 };
+
+export async function deleteCar(id){
+    return await fetch(`${databaseUrl}cars/${id}.json`, {
+        method: 'DELETE',
+    })
+}

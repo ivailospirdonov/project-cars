@@ -27,7 +27,7 @@ function App() {
               <div className="w-100" style={{ maxWidth: "400px" }}>
                 <PrivateRoute exact path="/cars/create-car" component={CarCreate} />
                 <PrivateRoute exact path="/cars/edit/:carId" component={CarEdit} />
-                <PrivateRoute exact path="/cars/:carId/parts" component={CarAddPart} />
+                <PrivateRoute exact path="/cars/add-part/:carId" component={CarAddPart} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/login" component={Login} />
                 <Route path="/forgot-password" component={ForgotPassword} />
