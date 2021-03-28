@@ -70,3 +70,20 @@ export async function addCarPart(id, name, price, shopUrl){
         body: JSON.stringify(part)
     })
 }
+
+export async function editCar(model, year, price, imageUrl, carId){
+    let car = {
+        model,
+        year,
+        price,
+        imageUrl
+    };
+
+    return fetch(`${databaseUrl}cars/${carId}.json`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(car)
+    })
+};

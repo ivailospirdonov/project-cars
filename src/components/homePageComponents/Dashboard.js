@@ -14,12 +14,12 @@ export default function Dashboard() {
         async function getAllCurrentCars() {
             let records = await getAllCars(currentUser.uid);
             setCars(records);
-            
+
         }
 
         getAllCurrentCars();
     }, []);
-    
+
     return (
         <>
             <div className="d-flex align-items-center justify-content-around">
@@ -31,15 +31,17 @@ export default function Dashboard() {
                 </div>
             </div>
             <div>
-                {cars.map(car => 
-                    <CarCard
-                        key={car[0]} 
-                        carId={car[0]}
-                        model={car[1].model}
-                        year={car[1].year}
-                        price={car[1].price}
-                        imageUrl={car[1].imageUrl}
-                    />)}
+                <ul>
+                    {cars.map(car =>
+                        <CarCard
+                            key={car[0]}
+                            carId={car[0]}
+                            model={car[1].model}
+                            year={car[1].year}
+                            price={car[1].price}
+                            imageUrl={car[1].imageUrl}
+                        />)}
+                </ul>
             </div>
         </>
     )

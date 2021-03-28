@@ -1,0 +1,80 @@
+import React, { useRef, useState, useEffect } from 'react';
+import { Form, Button, Card, Alert } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import { isWebUri } from 'valid-url';
+import { editCar } from '../../services/carsService';
+import { getOneCar } from '../../services/carsService';
+
+export default function CarEdit({ match }) {
+    const modelRef = useRef();
+    const yearRef = useRef();
+    const priceRef = useRef();
+    const imageUrlRef = useRef();
+    const [error, setError] = useState('');
+    const [car, setCar] = useState('');
+    const [loading, setLoading] = useState(false);
+    const history = useHistory();
+
+    useEffect(() => {
+        async function getCurrentCar() {
+            let result = await getOneCar(match.params.carId);
+            setCar(result);
+        }
+        getCurrentCar();
+    }, []);
+
+    async function handleSubmit(e) {
+        e.preventDefault()
+
+        if (!isWebUri(imageUrlRef.current.value)) {
+            return setError('Not a valid url.');
+        }
+
+        try {
+            setError('');
+            setLoading(true);
+            await editCar(
+                modelRef.current.value,
+                yearRef.current.value,
+                priceRef.current.value,
+                imageUrlRef.current.value,
+                match.params.carId
+            );
+            history.push(`/cars/details/${match.params.carId}`);
+        } catch {
+            setError('Failed to edit a project car!')
+        }
+        setLoading(false);
+
+    }
+
+    return (
+        <>
+            <Card>
+                <Card.Body>
+                    <h2 className="text-center mb-4">Edit Project Car</h2>
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group id="model">
+                            <Form.Label>Model</Form.Label>
+                            <Form.Control type="text" ref={modelRef} defaultValue={car.model} required />
+                        </Form.Group>
+                        <Form.Group id="year">
+                            <Form.Label>Year</Form.Label>
+                            <Form.Control type="text" ref={yearRef} defaultValue={car.year} required />
+                        </Form.Group>
+                        <Form.Group id="price">
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control type="number" ref={priceRef} defaultValue={car.price} required />
+                        </Form.Group>
+                        <Form.Group id="imageUrl">
+                            <Form.Label>Image URL</Form.Label>
+                            <Form.Control type="text" ref={imageUrlRef} defaultValue={car.imageUrl} required />
+                        </Form.Group>
+                        <Button disabled={loading} className="w-100" type="submit">Edit</Button>
+                    </Form>
+                </Card.Body>
+            </Card>
+        </>
+    )
+}

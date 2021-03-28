@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getOneCar, getAllParts } from '../../services/carsService';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import PartCard from './PartCard';
 
 export default function CarDetails({ match }) {
 
@@ -22,7 +24,11 @@ export default function CarDetails({ match }) {
         getCurrentParts();
     }, []);
 
-
+    async function handleCarDelete() {
+        try {
+        } catch {
+        }
+    }
 
     return (
         <div>
@@ -30,23 +36,20 @@ export default function CarDetails({ match }) {
             <h2>Car: {car.model}</h2>
             <h4>Year: {car.year}</h4>
             <h4>Price: {car.price}</h4>
+            <Link to={`/cars/edit/${match.params.carId}`}>Edit</Link>
+            <Button variant="link" onClick={handleCarDelete}>Delete</Button>
             <Link to={`/cars/${match.params.carId}/parts`}>Add part</Link>
             <div>
                 <h2>Car Parts</h2>
                 <ul>
-                    {parts.map(rec =>
-                        <li>
-                            <h6>
-                                Part Name: {rec[1].name}
-                            </h6>
-                            <h6>
-                                <a href={rec[1].shopUrl}>Shop Link</a>
-                            </h6>
-                            <h6>
-                                Price: {rec[1].price}lv.
-                            </h6>
-                        </li>
-                    )}
+                    {parts.map(part =>
+                        <PartCard
+                            key={part[0]}
+                            carId={part[0]}
+                            name={part[1].name}
+                            price={part[1].price}
+                            shopUrl={part[1].shopUrl}
+                        />)}
                 </ul>
             </div>
         </div>

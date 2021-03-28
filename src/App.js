@@ -6,6 +6,7 @@ import Login from './components/authComponents/Login';
 import PrivateRoute from './components/authComponents/PrivateRoute';
 import ForgotPassword from './components/authComponents/ForgotPassword';
 import CarCreate from './components/carComponents/CarCreate';
+import CarEdit from './components/carComponents/CarEdit';
 import CarDetails from './components/carComponents/CarDetails';
 import CarAddPart from './components/carComponents/CarAddPart';
 import { Container } from 'react-bootstrap';
@@ -25,6 +26,7 @@ function App() {
             <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
               <div className="w-100" style={{ maxWidth: "400px" }}>
                 <PrivateRoute exact path="/cars/create-car" component={CarCreate} />
+                <PrivateRoute exact path="/cars/edit/:carId" component={CarEdit} />
                 <PrivateRoute exact path="/cars/:carId/parts" component={CarAddPart} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/login" component={Login} />
