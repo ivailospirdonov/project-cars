@@ -93,3 +93,9 @@ export async function deleteCar(id){
         method: 'DELETE',
     })
 }
+
+export async function deletePart(carId, partId){
+    return await fetch(`${databaseUrl}cars/${carId}/parts/${partId}.json`, {
+        method: 'DELETE',
+    })
+}

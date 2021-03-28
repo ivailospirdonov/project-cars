@@ -30,7 +30,7 @@ export default function CarDetails({ match }) {
             await deleteCar(match.params.carId);
             history.push('/');
         } catch {
-            
+
         }
     }
 
@@ -49,7 +49,8 @@ export default function CarDetails({ match }) {
                     {parts.map(part =>
                         <PartCard
                             key={part[0]}
-                            carId={part[0]}
+                            carId={match.params.carId}
+                            partId={part[0]}
                             name={part[1].name}
                             price={part[1].price}
                             shopUrl={part[1].shopUrl}
