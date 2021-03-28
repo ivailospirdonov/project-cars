@@ -9,8 +9,19 @@ export async function getAll(id){
     })
     .then(res => res.json())
     const ownedCars = Object.entries(records).filter( rec => rec[1].ownerId === id);
-    console.log(ownedCars);
     return (ownedCars);
+}
+
+export async function getOneCar(id){
+    const record = await fetch(`${databaseUrl}cars/${id}.json`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(res => res.json())
+
+    return (record);
 }
 
 export async function create(model, year, price, imageUrl, ownerId){
@@ -31,3 +42,20 @@ export async function create(model, year, price, imageUrl, ownerId){
         body: JSON.stringify(car)
     })
 };
+
+export async function addCarPart(id, name, price, shopUrl){
+    let part = {
+        name,
+        price,
+        shopUrl,
+    };
+    
+
+    return fetch(`${databaseUrl}cars/${id}/parts.json`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(part)
+    })
+}

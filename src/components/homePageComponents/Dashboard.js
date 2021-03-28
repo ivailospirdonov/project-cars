@@ -14,11 +14,12 @@ export default function Dashboard() {
         async function getAllCars() {
             let records = await getAll(currentUser.uid);
             setCars(records);
+            
         }
 
         getAllCars();
     }, []);
-
+    
     return (
         <>
             <div className="d-flex align-items-center justify-content-around">
@@ -26,12 +27,14 @@ export default function Dashboard() {
                     <h1>All cars</h1>
                 </div>
                 <div>
-                    <Link to="/cars/create">Add Project Car</Link>
+                    <Link to="/cars/create-car">Add Project Car</Link>
                 </div>
             </div>
             <div>
-                {cars.map(car =>
-                    <CarCard key={car[0]}
+                {cars.map(car => 
+                    <CarCard
+                        key={car[0]} 
+                        carId={car[0]}
                         model={car[1].model}
                         year={car[1].year}
                         price={car[1].price}
