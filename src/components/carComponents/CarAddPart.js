@@ -8,14 +8,21 @@ export default function CarAddPart({ match }) {
     const partNameRef = useRef();
     const priceRef = useRef();
     const shopUrlRef = useRef();
+    const ownedCheckboxRef = useRef();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [checked, setChecked] = useState(false);
     const history = useHistory();
 
+    
+    async function handleIsItChecked(e) {
+        setChecked(e.target.checked);
+    }
+    
     async function handleSubmit(e) {
         e.preventDefault()
 
-        if (!isWebUri(shopUrlRef.current.value)) {
+        if (shopUrlRef.current.value && !isWebUri(shopUrlRef.current.value)) {
             return setError('Not a valid url.');
         }
 
@@ -27,6 +34,7 @@ export default function CarAddPart({ match }) {
                 partNameRef.current.value,
                 priceRef.current.value,
                 shopUrlRef.current.value,
+                checked
             );
             history.push(`/cars/details/${match.params.carId}`);
         } catch {
@@ -53,7 +61,10 @@ export default function CarAddPart({ match }) {
                         </Form.Group>
                         <Form.Group id="shopUrl">
                             <Form.Label>Shop URL</Form.Label>
-                            <Form.Control type="text" ref={shopUrlRef} required />
+                            <Form.Control type="text" ref={shopUrlRef} />
+                        </Form.Group>
+                        <Form.Group id="ownedCheckbox">
+                            <Form.Check type="checkbox" ref={ownedCheckboxRef} label="Do you own the part?" onClick={handleIsItChecked}/>
                         </Form.Group>
                         <Button disabled={loading} className="w-100" type="submit">Add</Button>
                     </Form>

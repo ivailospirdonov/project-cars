@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getOneCar, getAllParts, deleteCar } from '../../services/carsService';
 import { Link, useHistory } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import PartCard from './PartCard';
 
 export default function CarDetails({ match }) {
@@ -45,17 +45,38 @@ export default function CarDetails({ match }) {
             <Link to={`/cars/add-part/${match.params.carId}`}>Add part</Link>
             <div>
                 <h2>Car Parts</h2>
-                <ul>
-                    {parts.map(part =>
-                        <PartCard
-                            key={part[0]}
-                            carId={match.params.carId}
-                            partId={part[0]}
-                            name={part[1].name}
-                            price={part[1].price}
-                            shopUrl={part[1].shopUrl}
-                        />)}
-                </ul>
+                <Container className="d-flex justify-content-between">
+                    <div>
+                        <h3>Owned Parts:</h3>
+                        <ul id="ownedUl">
+                            {parts.filter(part => part[1].ownedCheck === true).map(part =>
+                                <PartCard
+                                    key={part[0]}
+                                    carId={match.params.carId}
+                                    partId={part[0]}
+                                    name={part[1].name}
+                                    price={part[1].price}
+                                    shopUrl={part[1].shopUrl}
+                                    ownedCheck={part[1].ownedCheck}
+                                />)}
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Unowned Parts:</h3>
+                        <ul>
+                            {parts.filter(part => part[1].ownedCheck === false).map(part =>
+                                <PartCard
+                                    key={part[0]}
+                                    carId={match.params.carId}
+                                    partId={part[0]}
+                                    name={part[1].name}
+                                    price={part[1].price}
+                                    shopUrl={part[1].shopUrl}
+                                    ownedCheck={part[1].ownedCheck}
+                                />)}
+                        </ul>
+                    </div>
+                </Container>
             </div>
         </div>
     )

@@ -55,11 +55,12 @@ export async function create(model, year, price, imageUrl, ownerId){
     })
 };
 
-export async function addCarPart(id, name, price, shopUrl){
+export async function addCarPart(id, name, price, shopUrl, ownedCheck){
     let part = {
         name,
         price,
         shopUrl,
+        ownedCheck
     };
 
     return fetch(`${databaseUrl}cars/${id}/parts.json`, {
@@ -85,6 +86,23 @@ export async function editCar(model, year, price, imageUrl, carId){
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(car)
+    })
+};
+
+export async function editPart(carId, partId, name, price, shopUrl, ownedCheck){
+    let part = {
+        name,
+        price,
+        shopUrl,
+        ownedCheck
+    };
+
+    return fetch(`${databaseUrl}cars/${carId}/parts/${partId}.json`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(part)
     })
 };
 
