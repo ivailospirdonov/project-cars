@@ -22,27 +22,36 @@ export default function Dashboard() {
 
     return (
         <>
-            <div className="d-flex align-items-center justify-content-around">
-                <div className="align-text-center">
-                    <h1>All cars</h1>
+            <div id="dashboard">
+                <div className="row w-100" >
+                    <div className="align-text-center col">
+                        <h1>All cars</h1>
+                    </div>
+                    <div className="col">
+                        <Link to="/cars/create-car">Add Project Car</Link>
+                    </div>
                 </div>
                 <div>
-                    <Link to="/cars/create-car">Add Project Car</Link>
+                    <ul>
+                        {cars.map(car =>
+                            <CarCard
+                                key={car[0]}
+                                carId={car[0]}
+                                model={car[1].model}
+                                year={car[1].year}
+                                price={car[1].price}
+                                imageUrl={car[1].imageUrl}
+                            />)}
+                    </ul>
                 </div>
             </div>
-            <div>
-                <ul>
-                    {cars.map(car =>
-                        <CarCard
-                            key={car[0]}
-                            carId={car[0]}
-                            model={car[1].model}
-                            year={car[1].year}
-                            price={car[1].price}
-                            imageUrl={car[1].imageUrl}
-                        />)}
-                </ul>
-            </div>
+            <style jsx>{`
+                #dashboard{
+                    width: 85%;
+                    min-height: 90vh;
+                    margin: auto;
+                }
+            `}</style>
         </>
     )
 }

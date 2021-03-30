@@ -34,17 +34,27 @@ export default function Header() {
                 </nav>
             </header>
             <style jsx>{`
+                #site-header{
+                    background-color: #292929;
+                }
+
+                #site-header h3{
+                    color: #f7f42f;
+                }
                 .navbar{
                     display: flex;
                     justify-content: space-between;
-                    margin: 0 15px;
+                    margin: auto;
+                    width: 85%;
                 }
                 .nav-menu > a{
                     margin-left: 15px;
+                    color: #f7f42f;
                 }
 
                 .nav-menu > .btn{
                     vertical-align: baseline;
+                    color: #f7f42f;
                 }
 
                 .nav-menu-wrapper{

@@ -8,6 +8,11 @@ const Footer = () => {
                 #site-footer{
                     display: flex;
                     justify-content: center;
+                    background-color: #292929;
+                }
+
+                #site-footer > p{
+                    color: #f7f42f;
                 }
             `}</style>
         </>
