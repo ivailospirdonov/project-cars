@@ -19,8 +19,22 @@ export default function CarCard({ carId, model, year, price, imageUrl }) {
                 </Card>
             </Link>
             <style jsx>{`
+                .carCard{
+                    color: #343a40;
+                }
+
                 .carCard:link{
                     text-decoration: none;
+                }
+
+                .carCard .card{
+                    background-color: #ededed;
+                }
+
+                .carCard:hover .card{
+                    background-color: #ededed;
+                    color: #000;
+                    transition: transform 1s;
                 }
 
                 .carCard:hover .carCardImg{

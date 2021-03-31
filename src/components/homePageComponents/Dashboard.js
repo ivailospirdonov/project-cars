@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { getAllCars } from '../../services/carsService';
 import { useAuth } from '../../contexts/AuthContext';
 import CarCard from '../carComponents/CarCard';
+import { colors } from '../../styles/colors';
 
 export default function Dashboard() {
 
@@ -50,11 +51,17 @@ export default function Dashboard() {
                     min-height: 90vh;
                     margin: auto;
                 }
-
-                .addCarBtn:hover .btn{
-                    background-color: #292929;
-                    color: #f7f42f;
+                
+                .addCarBtn .btn:hover{
+                    background-color: ${colors.backgroundColor};
+                    color:  ${colors.color};
                 }
+
+                .addCarBtn .btn{
+                    background-color: #ededed;
+                    color: #000;
+                }
+
             `}</style>
         </>
     )
