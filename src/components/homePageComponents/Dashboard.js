@@ -67,9 +67,9 @@ export default function Dashboard() {
                 </Carousel.Item>
             </Carousel>
             <Container id="dashboard">
-                <row className="d-flex justify-content-center dashboardTitle my-3">
+                <div className="d-flex justify-content-center dashboardTitle my-3">
                     <h1>Project Cars</h1>
-                </row>
+                </div>
                 <hr></hr>
                 <div className="row w-100 mx-auto my-4" >
                     <div className="align-text-center col">
