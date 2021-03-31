@@ -9,20 +9,23 @@ export default function CarCard({ carId, model, year, price, imageUrl }) {
             <Link to={`/cars/details/${carId}`} className="col-4 carCard">
                 <Card>
                     <div className="carCardImgWrap">
-                        <Card.Img variant="top" src={imageUrl} class="carCardImg" />
+                        <Card.Img variant="top" src={imageUrl} className="carCardImg" />
                     </div>
                     <Card.Body>
                         <Card.Title>{model}</Card.Title>
                         <Card.Text>Year: {year}</Card.Text>
-                        <Link to={`/cars/details/${carId}`} class="btn btn-outline-dark">Details</Link>
+                        <button className="btn btn-outline-dark">Details</button>
                     </Card.Body>
                 </Card>
             </Link>
             <style jsx>{`
+                .carCard:link{
+                    text-decoration: none;
+                }
 
                 .carCard:hover .carCardImg{
                     transition: transform 1s;
-                    transform: translate(-50%, -50%) scale(1.2);
+                    transform: translate(-50%, -50%) scale(1.1);
                 }
 
                 .carCardImgWrap{
@@ -43,6 +46,11 @@ export default function CarCard({ carId, model, year, price, imageUrl }) {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
+                }
+
+                .carCard:hover .btn{
+                    background-color: #292929;
+                    color: #f7f42f;
                 }
             `}</style>
         </>

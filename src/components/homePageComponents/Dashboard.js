@@ -23,15 +23,15 @@ export default function Dashboard() {
     return (
         <>
             <Container id="dashboard">
-                <div className="row w-100" >
+                <div className="row w-100 mx-auto my-4" >
                     <div className="align-text-center col">
                         <h1>All cars</h1>
                     </div>
-                    <div className="col d-flex justify-content-end">
-                        <Link to="/cars/create-car" class="btn btn-outline-dark btn-lg" role="button">Add Project Car</Link>
+                    <div className="col d-flex justify-content-end addCarBtn">
+                        <Link to="/cars/create-car" className="btn btn-outline-dark btn-lg" role="button">Add Project Car</Link>
                     </div>
                 </div>
-                <div className="row w-100">
+                <div className="row w-100 mx-auto">
                    
                         {cars.map(car =>
                             <CarCard
@@ -49,6 +49,11 @@ export default function Dashboard() {
                     width: 85%;
                     min-height: 90vh;
                     margin: auto;
+                }
+
+                .addCarBtn:hover .btn{
+                    background-color: #292929;
+                    color: #f7f42f;
                 }
             `}</style>
         </>
