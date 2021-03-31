@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { isWebUri } from 'valid-url';
 import { editCar } from '../../services/carsService';
 import { getOneCar } from '../../services/carsService';
+import { colors } from '../../styles/colors';
 
 export default function CarEdit({ match }) {
     const modelRef = useRef();
@@ -71,10 +72,16 @@ export default function CarEdit({ match }) {
                             <Form.Label>Image URL</Form.Label>
                             <Form.Control type="text" ref={imageUrlRef} defaultValue={car.imageUrl} required />
                         </Form.Group>
-                        <Button disabled={loading} className="w-100" type="submit">Edit</Button>
+                        <Button disabled={loading} className="w-100 carEditCardBtn" type="submit" variant="outline-dark">Edit</Button>
                     </Form>
                 </Card.Body>
             </Card>
+            <style jsx>{`
+                .carEditCardBtn:hover{
+                    background-color: ${colors.backgroundColor};
+                    color:  ${colors.color};
+                }
+            `}</style>
         </>
     )
 }

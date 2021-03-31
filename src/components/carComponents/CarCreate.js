@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { isWebUri } from 'valid-url';
 import { useAuth } from '../../contexts/AuthContext';
 import { create } from '../../services/carsService';
+import { colors } from '../../styles/colors';
 
 export default function CarCreate() {
     const modelRef = useRef();
@@ -42,7 +43,7 @@ export default function CarCreate() {
 
     return (
         <>
-            <Card>
+            <Card classname="carCreateCard">
                 <Card.Body>
                     <h2 className="text-center mb-4">Create a Project Car</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -63,10 +64,16 @@ export default function CarCreate() {
                             <Form.Label>Image URL</Form.Label>
                             <Form.Control type="text" ref={imageUrlRef} required />
                         </Form.Group>
-                        <Button disabled={loading} className="w-100" type="submit">Create</Button>
+                        <Button disabled={loading} className="w-100 carCreateCardBtn" variant="outline-dark" type="submit">Create</Button>
                     </Form>
                 </Card.Body>
             </Card>
+            <style jsx>{`
+                .carCreateCardBtn:hover{
+                    background-color: ${colors.backgroundColor};
+                    color:  ${colors.color};
+                }
+            `}</style>
         </>
     )
 }

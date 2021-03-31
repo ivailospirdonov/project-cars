@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { isWebUri } from 'valid-url';
 import { addCarPart } from '../../services/carsService';
+import { colors } from '../../styles/colors';
 
 export default function CarAddPart({ match }) {
     const partNameRef = useRef();
@@ -66,10 +67,16 @@ export default function CarAddPart({ match }) {
                         <Form.Group id="ownedCheckbox">
                             <Form.Check type="checkbox" ref={ownedCheckboxRef} label="Do you own the part?" onClick={handleIsItChecked}/>
                         </Form.Group>
-                        <Button disabled={loading} className="w-100" type="submit">Add</Button>
+                        <Button disabled={loading} className="w-100 partCreateCardBtn" type="submit" variant="outline-dark">Add</Button>
                     </Form>
                 </Card.Body>
             </Card>
+            <style jsx>{`
+                .partCreateCardBtn:hover{
+                    background-color: ${colors.backgroundColor};
+                    color:  ${colors.color};
+                }
+            `}</style>
         </>
     )
 }

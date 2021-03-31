@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { colors } from '../../styles/colors';
 
 export default function Header() {
 
@@ -35,11 +36,14 @@ export default function Header() {
             </header>
             <style jsx>{`
                 #site-header{
-                    background-color: #292929;
+                    background-color: ${colors.backgroundColor};
+                    color:  ${colors.color};
                 }
 
-                #site-header h3{
-                    color: #f7f42f;
+                #site-header h3,
+                .nav-menu > a,
+                .nav-menu > .btn{
+                    color:  ${colors.color};
                 }
                 .navbar{
                     display: flex;
@@ -49,12 +53,10 @@ export default function Header() {
                 }
                 .nav-menu > a{
                     margin-left: 15px;
-                    color: #f7f42f;
                 }
 
                 .nav-menu > .btn{
                     vertical-align: baseline;
-                    color: #f7f42f;
                 }
 
                 .nav-menu-wrapper{

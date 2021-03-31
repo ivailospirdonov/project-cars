@@ -1,3 +1,5 @@
+import { colors } from '../../styles/colors';
+
 const Footer = () => {
     return (
         <>
@@ -8,11 +10,11 @@ const Footer = () => {
                 #site-footer{
                     display: flex;
                     justify-content: center;
-                    background-color: #292929;
+                    background-color: ${colors.backgroundColor};
                 }
 
                 #site-footer > p{
-                    color: #f7f42f;
+                    color:  ${colors.color};
                 }
             `}</style>
         </>

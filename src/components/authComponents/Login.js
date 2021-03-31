@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
+import { colors } from '../../styles/colors';
 
 export default function Login() {
     const emailRef = useRef();
@@ -41,7 +42,7 @@ export default function Login() {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" ref={passwordRef} required />
                         </Form.Group>
-                        <Button disabled={loading} className="w-100" type="submit">Log In</Button>
+                        <Button disabled={loading} className="w-100 loginBtn" type="submit" variant="outline-dark">Log In</Button>
                     </Form>
                     <div className="w-100 text-center mt-3">
                         <Link to="/forgot-password">Forgot Password?</Link>
@@ -51,6 +52,12 @@ export default function Login() {
             <div className="w-100 text-center mt-2">
                 Need an account? <Link to="/signup">Sign up</Link>
             </div>
+            <style jsx>{`
+                .loginBtn:hover{
+                    background-color: ${colors.backgroundColor};
+                    color:  ${colors.color};
+                }
+            `}</style>
         </>
     )
 }
