@@ -32,7 +32,7 @@ export default function PartCard({ carId, partId, name, price, shopUrl, ownedChe
                 <h2>{name}</h2>
                 <h4>{price}lv.</h4>
                 {shopUrl && <Link to={shopUrl}>Link to the shop</Link>}
-                {ownedCheck === false &&  <Button variant="link" onClick={handlePartBougth}>Bought the part!</Button>}
+                {ownedCheck === false && <Button variant="link" onClick={handlePartBougth}>Bought the part!</Button>}
                 <Button variant="link" onClick={handlePartDelete}>Delete</Button>
             </li> 
     )

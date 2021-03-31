@@ -67,9 +67,13 @@ export default function Dashboard() {
                 </Carousel.Item>
             </Carousel>
             <Container id="dashboard">
+                <row className="d-flex justify-content-center dashboardTitle my-3">
+                    <h1>Project Cars</h1>
+                </row>
+                <hr></hr>
                 <div className="row w-100 mx-auto my-4" >
                     <div className="align-text-center col">
-                        <h1>All cars</h1>
+                        <h2>All cars</h2>
                     </div>
                     <div className="col d-flex justify-content-end addCarBtn">
                         <Link to="/cars/create-car" className="btn btn-outline-dark btn-lg" role="button">Add Project Car</Link>
@@ -86,6 +90,7 @@ export default function Dashboard() {
                             price={car[1].price}
                             imageUrl={car[1].imageUrl}
                         />)}
+                    {cars.length == 0 && <h4>No project cars created yet!</h4>}
                 </div>
             </Container>
             <style jsx>{`
@@ -93,6 +98,10 @@ export default function Dashboard() {
                     width: 85%;
                     min-height: 90vh;
                     margin: auto;
+                }
+
+                .dashboardTitle{
+                    font-size: 3.5em;
                 }
 
                 .addCarBtn .btn:hover{
