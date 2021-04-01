@@ -8,12 +8,12 @@ export default function PartCard({ carId, partId, name, price, shopUrl, ownedChe
     async function handlePartBougth(e) {
         const ownedUl = document.getElementById('ownedUl');
 
-        try{
+        try {
             ownedCheck = true;
             await editPart(carId, partId, name, price, shopUrl, ownedCheck);
-            ownedUl.appendChild(e.target.parentElement);
+            ownedUl.appendChild(e.target.parentElement.parentElement);
             e.target.remove();
-        }catch{
+        } catch {
 
         }
     }
@@ -21,19 +21,26 @@ export default function PartCard({ carId, partId, name, price, shopUrl, ownedChe
     async function handlePartDelete(e) {
         try {
             await deletePart(carId, partId);
-            e.target.parentElement.remove();
+            e.target.parentElement.parentElement.remove();
         } catch {
-            
+
         }
     }
 
     return (
-            <li>
-                <h2>{name}</h2>
-                <h4>{price}lv.</h4>
-                {shopUrl && <Link to={shopUrl}>Link to the shop</Link>}
-                {ownedCheck === false && <Button variant="link" onClick={handlePartBougth}>Bought the part!</Button>}
-                <Button variant="link" onClick={handlePartDelete}>Delete</Button>
-            </li> 
+        <>
+            <div className="d-flex">
+                <div className="col-3">
+                    <h4>{name}</h4>
+                    <h6>{price}lv.</h6>
+                </div>
+                <div className="partCardBtns d-flex justify-content-end btn-group col-9" role="group">
+                    {shopUrl && <Link to={shopUrl} className="btn btn-outline-dark btn-custom-hover col-4 btn-sm" role="button">Link to the Shop</Link>}
+                    {ownedCheck === false && <button className="btn btn-outline-dark btn-custom-hover col-4 btn-sm" role="button" onClick={handlePartBougth}>Bought the part!</button>}
+                    <button className="btn btn-outline-dark btn-custom-hover col-4 btn-sm" role="button" onClick={handlePartDelete}>Delete</button>
+                </div>
+            </div>
+            <hr></hr>
+        </>
     )
 }

@@ -43,7 +43,7 @@ export default function CarCreate() {
 
     return (
         <>
-            <Card classname="carCreateCard">
+            <Card className="carCreateCard">
                 <Card.Body>
                     <h2 className="text-center mb-4">Create a Project Car</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -64,15 +64,28 @@ export default function CarCreate() {
                             <Form.Label>Image URL</Form.Label>
                             <Form.Control type="text" ref={imageUrlRef} required />
                         </Form.Group>
-                        <Button disabled={loading} className="w-100 carCreateCardBtn" variant="outline-dark" type="submit">Create</Button>
+                        <Button disabled={loading} className="w-100 carCreateCardBtn" type="submit">Create</Button>
                     </Form>
                 </Card.Body>
             </Card>
             <style jsx>{`
-                .carCreateCardBtn:hover{
+                .carCreateCard{
+                    background: transparent;
+                    color:  ${colors.color};
+                    border-color: ${colors.color};
+                }
+
+
+                .carCreateCardBtn{
+                    border-color: ${colors.color};
                     background-color: ${colors.backgroundColor};
                     color:  ${colors.color};
                 }
+                .carCreateCardBtn:hover{
+                    background-color: #000;
+                    border-color: ${colors.color};
+                }
+
             `}</style>
         </>
     )

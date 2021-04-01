@@ -21,7 +21,7 @@ export default function Header() {
         <>
             <header id="site-header">
                 <Container>
-                    <nav className="navbar">
+                    <nav className="navbar px-0">
                         <section className="nav-logo-section">
                             <h3>Project Cars</h3>
                         </section>
