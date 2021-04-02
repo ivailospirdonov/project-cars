@@ -37,7 +37,7 @@ export default function CarDetails({ match }) {
 
     return (
         <>
-            <Container className="my-3 carDetailsContainer">
+            <Container className="py-3 carDetailsContainer">
                 <Card>
                     <Card.Body>
                         <div className="row d-flex justify-content-center">
@@ -49,20 +49,20 @@ export default function CarDetails({ match }) {
                             <div className="col-5">
                                 <h1>{car.model}</h1>
                                 <h4>Year: {car.year}</h4>
-                                <h4>Price: {car.price}</h4>
+                                <h4>Price: {car.price}lv.</h4>
                                 <div className="carDetailsBtns w-90 d-flex justify-content-center btn-group" role="group">
-                                    <Link to={`/cars/edit/${match.params.carId}`} className="btn btn-outline-dark btn-custom-hover col-4" role="button">Edit</Link>
-                                    <Link to={`/cars/add-part/${match.params.carId}`} className="btn btn-outline-dark btn-custom-hover col-4" role="button">Add part</Link>
-                                    <Link to={`/cars/edit/${match.params.carId}`} className="btn btn-danger col-4" role="button" onClick={handleCarDelete}>Delete</Link>
+                                    <Link to={`/cars/edit/${match.params.carId}`} className="btn btn-secondary btn-custom-hover col-4" role="button">Edit</Link>
+                                    <Link to={`/cars/add-part/${match.params.carId}`} className="btn btn-dark btn-custom-hover col-4" role="button">Add part</Link>
+                                    <button className="btn btn-danger col-4" role="button" onClick={handleCarDelete}>Delete</button>
                                 </div>
                             </div>
                         </div>
                         <hr></hr>
-                        <div >
-                            <h2 className="d-flex justify-content-center">Car Parts</h2>
+                        <div className="partsSection">
+                            <h2 className="d-flex justify-content-center mb-4">Car Parts</h2>
                             <div className="row d-flex justify-content-around">
                                 <div className="col-6">
-                                    <h4>Owned Parts:</h4>
+                                    <h4 className="mb-3">Owned Parts:</h4>
                                     <div id="ownedUl">
                                         {parts.filter(part => part[1].ownedCheck === true).map(part =>
                                             <PartCard
@@ -74,10 +74,11 @@ export default function CarDetails({ match }) {
                                                 shopUrl={part[1].shopUrl}
                                                 ownedCheck={part[1].ownedCheck}
                                             />)}
+                                            {parts.length == 0 && <h4>No parts added yet!</h4>}
                                     </div>
                                 </div>
                                 <div className="col-6">
-                                    <h4>Unowned Parts:</h4>
+                                    <h4 className="mb-3">Unowned Parts:</h4>
                                     <div>
                                         {parts.filter(part => part[1].ownedCheck === false).map(part =>
                                             <PartCard
@@ -97,10 +98,18 @@ export default function CarDetails({ match }) {
                 </Card>
             </Container>
             <style jsx>{`
+                .site-container{
+                    background-color: #1c1c1c;
+                }
+
                 .carDetailsContainer{
                     min-height: 90vh;
                 }
 
+                .carDetailsContainer .card{
+                    background-color: #2b2b2b;
+                    color:  #fff;
+                }
                 .carDetailsWrap{
                     display: block;
                     position: relative;
@@ -120,6 +129,10 @@ export default function CarDetails({ match }) {
                     transform: translate(-50%, -50%);
                 }
 
+                .carDetailsContainer .card h1{
+                    color: ${colors.color};
+                }
+
                 .carDetailsBtns{
                     position: absolute;
                     bottom: 0;
@@ -127,8 +140,16 @@ export default function CarDetails({ match }) {
                 }
 
                 .carDetailsBtns .btn-custom-hover:hover{
-                    background-color: ${colors.backgroundColor};
                     color:  ${colors.color};
+                }
+
+                .carDetailsContainer hr{
+                    background-color: #fff;
+                }
+
+                .partsSection h2,
+                .partsSection h4{
+                    color: ${colors.color};
                 }
             `}</style>
         </>

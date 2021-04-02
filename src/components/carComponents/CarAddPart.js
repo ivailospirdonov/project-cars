@@ -47,7 +47,7 @@ export default function CarAddPart({ match }) {
 
     return (
         <>
-            <Card>
+            <Card className="partCreateCard">
                 <Card.Body>
                     <h2 className="text-center mb-4">Add Part</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -72,10 +72,32 @@ export default function CarAddPart({ match }) {
                 </Card.Body>
             </Card>
             <style jsx>{`
-                .partCreateCardBtn:hover{
+                .partCreateCard{
+                    background: transparent;
+                    color:  ${colors.color};
+                    border-color: ${colors.color};
+                }
+
+                .partCreateCard input{
+                    border-color: ${colors.color};
+                }
+
+                .partCreateCard input,
+                .partCreateCard input:focus{
+                    background: transparent;
+                    color: #fff;
+                }
+
+                .partCreateCardBtn{
+                    border-color: ${colors.color};
                     background-color: ${colors.backgroundColor};
                     color:  ${colors.color};
                 }
+                .partCreateCardBtn:hover{
+                    background-color: #000;
+                    border-color: ${colors.color};
+                }
+
             `}</style>
         </>
     )

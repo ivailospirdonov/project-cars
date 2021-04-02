@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
+import { colors } from '../../styles/colors';
 
 export default function CarCard({ carId, model, year, price, imageUrl }) {
 
     return (
         <>
-            <Link to={`/cars/details/${carId}`} className="col-4 carCard">
+            <Link to={`/cars/details/${carId}`} className="col-4 mb-4 carCard">
                 <Card>
                     <div className="carCardImgWrap">
                         <Card.Img variant="top" src={imageUrl} className="carCardImg" />
@@ -19,21 +20,18 @@ export default function CarCard({ carId, model, year, price, imageUrl }) {
                 </Card>
             </Link>
             <style jsx>{`
-                .carCard{
-                    color: #343a40;
-                }
 
                 .carCard:link{
                     text-decoration: none;
                 }
 
                 .carCard .card{
-                    background-color: #ededed;
+                    background-color: ${colors.backgroundColor};
+                    color:  ${colors.color};
                 }
 
                 .carCard:hover .card{
-                    background-color: #ededed;
-                    color: #000;
+                    background-color: #2b2b2b;
                     transition: transform 1s;
                 }
 
@@ -60,6 +58,12 @@ export default function CarCard({ carId, model, year, price, imageUrl }) {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
+                }
+
+                .carCard .btn{
+                    background-color: #292929;
+                    border-color: aliceblue;
+                    color: aliceblue;
                 }
 
                 .carCard:hover .btn{

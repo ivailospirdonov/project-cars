@@ -94,9 +94,15 @@ export default function Dashboard() {
                 </div>
             </Container>
             <style jsx>{`
+                .site-container{
+                    background-color: #1c1c1c;
+                    z-index: -1
+                }
+                
                 #dashboard{
+                    color:  ${colors.color};
                     width: 85%;
-                    min-height: 90vh;
+                    min-height: 65vh;
                     margin: auto;
                 }
 
@@ -104,14 +110,18 @@ export default function Dashboard() {
                     font-size: 3.5em;
                 }
 
+                #dashboard hr{
+                    background-color: aliceblue;
+                }
+
                 .addCarBtn .btn:hover{
-                    background-color: ${colors.backgroundColor};
-                    color:  ${colors.color};
+                    background-color: #2b2b2b;
                 }
 
                 .addCarBtn .btn{
-                    background-color: #ededed;
-                    color: #000;
+                    background-color: ${colors.backgroundColor};
+                    border-color: ${colors.color};
+                    color:  ${colors.color};
                 }
 
                 .carouselImgWrap{

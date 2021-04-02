@@ -29,7 +29,7 @@ export default function ForgotPassword() {
 
     return (
         <>
-            <Card>
+            <Card className="forgotPassCard">
                 <Card.Body>
                     <h2 className="text-center mb-4">Password Reset</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -41,19 +41,50 @@ export default function ForgotPassword() {
                         </Form.Group>
                         <Button disabled={loading} className="w-100 forgorPassBtn" type="submit" variant="outline-dark">Reset Password</Button>
                     </Form>
-                    <div className="w-100 text-center mt-3">
+                    <hr></hr>
+                    <div className="w-100 text-center mt-2">
                         <Link to="/login">Login</Link>
+                    </div>
+                    <div className="w-100 text-center mt-2">
+                        Need an account? <Link to="/signup">Sign up</Link>
                     </div>
                 </Card.Body>
             </Card>
-            <div className="w-100 text-center mt-2">
-                Need an account? <Link to="/signup">Sign up</Link>
-            </div>
             <style jsx>{`
-                .forgorPassBtn:hover{
+                .forgotPassCard{
+                    background: transparent;
+                    color:  ${colors.color};
+                    border-color: ${colors.color};
+                }
+
+                .forgotPassCard input{
+                    border-color: ${colors.color};
+                }
+
+                .forgotPassCard input,
+                .forgotPassCard input:focus{
+                    background: transparent;
+                    color: #fff;
+                }
+
+                .forgotPassCard hr{
+                    background-color: ${colors.color};
+                }
+
+                .forgotPassCard a{
+                    color: #fff;
+                }
+
+                .forgorPassBtn{
+                    border-color: ${colors.color};
                     background-color: ${colors.backgroundColor};
                     color:  ${colors.color};
                 }
+                .forgorPassBtn:hover{
+                    background-color: #000;
+                    border-color: ${colors.color};
+                }
+
             `}</style>
         </>
     )

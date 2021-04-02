@@ -29,18 +29,27 @@ export default function PartCard({ carId, partId, name, price, shopUrl, ownedChe
 
     return (
         <>
-            <div className="d-flex">
-                <div className="col-3">
+            <div className="partCard pb-3 mb-3">
+                <div className="d-flex justify-content-between">
                     <h4>{name}</h4>
                     <h6>{price}lv.</h6>
                 </div>
-                <div className="partCardBtns d-flex justify-content-end btn-group col-9" role="group">
-                    {shopUrl && <Link to={shopUrl} className="btn btn-outline-dark btn-custom-hover col-4 btn-sm" role="button">Link to the Shop</Link>}
-                    {ownedCheck === false && <button className="btn btn-outline-dark btn-custom-hover col-4 btn-sm" role="button" onClick={handlePartBougth}>Bought the part!</button>}
-                    <button className="btn btn-outline-dark btn-custom-hover col-4 btn-sm" role="button" onClick={handlePartDelete}>Delete</button>
+                <div className="partCardBtns d-flex justify-content-end btn-group" role="group">
+                    {shopUrl && <a href={shopUrl} className="btn btn-secondary btn-custom-hover col-4 btn-sm" role="button">Link to the Shop</a>}
+                    {ownedCheck === false && <button className="btn btn-dark btn-custom-hover col-4 btn-sm" role="button" onClick={handlePartBougth}>Add to owned!</button>}
+                    <button className="btn btn-danger btn-custom-hover col-4 btn-sm" role="button" onClick={handlePartDelete}>Delete</button>
                 </div>
             </div>
-            <hr></hr>
+            <style jsx>{`
+                .partCard{
+                    border-bottom: 1px solid #fff;
+                }
+
+                .partCardBtns{
+                    display: block;
+                }
+                
+            `}</style>
         </>
     )
 }

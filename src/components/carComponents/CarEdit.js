@@ -51,7 +51,7 @@ export default function CarEdit({ match }) {
 
     return (
         <>
-            <Card>
+            <Card className="carEditCard">
                 <Card.Body>
                     <h2 className="text-center mb-4">Edit Project Car</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -77,10 +77,32 @@ export default function CarEdit({ match }) {
                 </Card.Body>
             </Card>
             <style jsx>{`
-                .carEditCardBtn:hover{
+                .carEditCard{
+                    background: transparent;
+                    color:  ${colors.color};
+                    border-color: ${colors.color};
+                }
+
+                .carEditCard input{
+                    border-color: ${colors.color};
+                }
+
+                .carEditCard input,
+                .carEditCard input:focus{
+                    background: transparent;
+                    color: #fff;
+                }
+
+                .carEditCardBtn{
+                    border-color: ${colors.color};
                     background-color: ${colors.backgroundColor};
                     color:  ${colors.color};
                 }
+                .carEditCardBtn:hover{
+                    background-color: #000;
+                    border-color: ${colors.color};
+                }
+
             `}</style>
         </>
     )

@@ -29,7 +29,7 @@ export default function Login() {
 
     return (
         <>
-            <Card>
+            <Card className="loginCard">
                 <Card.Body>
                     <h2 className="text-center mb-4">Log in</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -42,21 +42,51 @@ export default function Login() {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" ref={passwordRef} required />
                         </Form.Group>
-                        <Button disabled={loading} className="w-100 loginBtn" type="submit" variant="outline-dark">Log In</Button>
+                        <Button disabled={loading} className="w-100 loginCardBtn" type="submit" variant="outline-dark">Log In</Button>
                     </Form>
                     <div className="w-100 text-center mt-3">
                         <Link to="/forgot-password">Forgot Password?</Link>
                     </div>
+                    <div className="w-100 text-center mt-2">
+                        Need an account? <Link to="/signup">Sign up</Link>
+                    </div>
                 </Card.Body>
             </Card>
-            <div className="w-100 text-center mt-2">
-                Need an account? <Link to="/signup">Sign up</Link>
-            </div>
             <style jsx>{`
-                .loginBtn:hover{
+                .loginCard{
+                    background: transparent;
+                    color:  ${colors.color};
+                    border-color: ${colors.color};
+                }
+
+                .loginCard input{
+                    border-color: ${colors.color};
+                }
+
+                .loginCard input,
+                .loginCard input:focus{
+                    background: transparent;
+                    color: #fff;
+                }
+
+                .loginCard hr{
+                    background-color: ${colors.color};
+                }
+
+                .loginCard a{
+                    color: #fff;
+                }
+
+                .loginCardBtn{
+                    border-color: ${colors.color};
                     background-color: ${colors.backgroundColor};
                     color:  ${colors.color};
                 }
+                .loginCardBtn:hover{
+                    background-color: #000;
+                    border-color: ${colors.color};
+                }
+
             `}</style>
         </>
     )
