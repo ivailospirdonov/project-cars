@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 import { deletePart, editPart } from '../../services/carsService';
+import { colors } from '../../styles/colors';
 
 export default function PartCard({ carId, partId, name, price, shopUrl, ownedCheck }) {
+    const ownedUl = document.getElementById('ownedUl');
 
     async function handlePartBougth(e) {
-        const ownedUl = document.getElementById('ownedUl');
 
         try {
             ownedCheck = true;
@@ -47,6 +46,10 @@ export default function PartCard({ carId, partId, name, price, shopUrl, ownedChe
 
                 .partCardBtns{
                     display: block;
+                }
+
+                .partCardBtns .btn-custom-hover:hover{
+                    color:  ${colors.color};
                 }
                 
             `}</style>

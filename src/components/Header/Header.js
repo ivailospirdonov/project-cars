@@ -21,16 +21,16 @@ export default function Header() {
         <>
             <header id="site-header">
                 <Container>
-                    <nav className="navbar px-0">
+                    <nav className="navbar p-0">
                         <section className="nav-logo-section">
                             <h3>Project Cars</h3>
                         </section>
                         <section className="nav-menu-wrapper">
                             <div className="nav-menu">
-                                <Link to="/">Home</Link>
-                                {!currentUser && <Link to="/login">Log in</Link>}
-                                {!currentUser && <Link to="/signup">Sign Up</Link>}
-                                {currentUser && <Button variant="link" onClick={handleLogout}>Log out</Button>}
+                                <Link to="/" className="btn btn-custom-hover py-3" role="button">Home</Link>
+                                {!currentUser && <Link to="/login" className="btn btn-custom-hover py-3" role="button">Log in</Link>}
+                                {!currentUser && <Link to="/signup" className="btn btn-custom-hover py-3" role="button">Sign Up</Link>}
+                                {currentUser && <button className="btn py-3" role="button" onClick={handleLogout}>Log out</button>}
                             </div>
                         </section>
                     </nav>
@@ -58,6 +58,17 @@ export default function Header() {
 
                 .nav-menu > .btn{
                     vertical-align: baseline;
+                }
+
+                .nav-menu > .btn:focus{
+                    box-shadow: none;
+                    vertical-align: baseline;
+                }
+
+                .nav-menu > .btn:hover{
+                    border-radius: 0;
+                    background-color: ${colors.color};
+                    color:  ${colors.backgroundColor};
                 }
 
                 .nav-menu-wrapper{
