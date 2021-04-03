@@ -10,6 +10,7 @@ import CarEdit from './components/carComponents/CarEdit';
 import CarDetails from './components/carComponents/CarDetails';
 import CarAddPart from './components/carComponents/CarAddPart';
 import CoverPhoto from './components/coverPhotos/CoverPhoto';
+import NotFound from './components/notFoundComponent/NotFound';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './contexts/AuthContext';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -28,12 +29,15 @@ function App() {
               <CoverPhoto >
                 <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
                   <div className="w-100" style={{ maxWidth: "400px" }}>
-                    <PrivateRoute exact path="/cars/create-car" component={CarCreate} />
-                    <PrivateRoute exact path="/cars/edit/:carId" component={CarEdit} />
-                    <PrivateRoute exact path="/cars/add-part/:carId" component={CarAddPart} />
-                    <Route path="/signup" component={Signup} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/forgot-password" component={ForgotPassword} />
+                    <Switch>
+                      <PrivateRoute exact path="/cars/create-car" component={CarCreate} />
+                      <PrivateRoute exact path="/cars/edit/:carId" component={CarEdit} />
+                      <PrivateRoute exact path="/cars/add-part/:carId" component={CarAddPart} />
+                      <Route exact path="/signup" component={Signup} />
+                      <Route exact path="/login" component={Login} />
+                      <Route exact path="/forgot-password" component={ForgotPassword} />
+                      <Route component={NotFound} />
+                    </Switch>
                   </div>
                 </Container>
               </CoverPhoto>

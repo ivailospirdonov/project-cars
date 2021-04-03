@@ -36,7 +36,7 @@ export default function PartCard({ carId, partId, name, price, shopUrl, ownedChe
                 <div className="partCardBtns d-flex justify-content-end btn-group" role="group">
                     {shopUrl && <a href={shopUrl} className="btn btn-secondary btn-custom-hover col-4 btn-sm" role="button">Link to the Shop</a>}
                     {ownedCheck === false && <button className="btn btn-dark btn-custom-hover col-4 btn-sm" role="button" onClick={handlePartBougth}>Add to owned!</button>}
-                    <button className="btn btn-danger btn-custom-hover col-4 btn-sm" role="button" onClick={handlePartDelete}>Delete</button>
+                    <button className="btn btn-danger col-4 btn-sm" role="button" onClick={handlePartDelete}>Delete</button>
                 </div>
             </div>
             <style jsx>{`

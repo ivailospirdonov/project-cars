@@ -23,7 +23,7 @@ export default function Header() {
                 <Container>
                     <nav className="navbar p-0">
                         <section className="nav-logo-section">
-                            <h3>Project Cars</h3>
+                            <Link to="/" ><h3>Project Cars</h3></Link>
                         </section>
                         <section className="nav-menu-wrapper">
                             <div className="nav-menu">
@@ -42,6 +42,10 @@ export default function Header() {
                     color:  ${colors.color};
                 }
 
+                .nav-logo-section a:hover{
+                    text-decoration: none;
+                }
+
                 #site-header h3,
                 .nav-menu > a,
                 .nav-menu > .btn{
@@ -52,8 +56,9 @@ export default function Header() {
                     justify-content: space-between;
                     margin: auto;
                 }
-                .nav-menu > a{
-                    margin-left: 15px;
+                .nav-menu > a,
+                .nav-menu > .btn{
+                    font-weight: 600;
                 }
 
                 .nav-menu > .btn{
