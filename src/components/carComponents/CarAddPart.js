@@ -15,11 +15,11 @@ export default function CarAddPart({ match }) {
     const [checked, setChecked] = useState(false);
     const history = useHistory();
 
-    
+
     async function handleIsItChecked(e) {
         setChecked(e.target.checked);
     }
-    
+
     async function handleSubmit(e) {
         e.preventDefault()
 
@@ -65,7 +65,7 @@ export default function CarAddPart({ match }) {
                             <Form.Control type="text" ref={shopUrlRef} />
                         </Form.Group>
                         <Form.Group id="ownedCheckbox">
-                            <Form.Check type="checkbox" ref={ownedCheckboxRef} label="Do you own the part?" onClick={handleIsItChecked}/>
+                            <Form.Check type="checkbox" ref={ownedCheckboxRef} label="Do you own the part?" onClick={handleIsItChecked} />
                         </Form.Group>
                         <Button disabled={loading} className="w-100 partCreateCardBtn" type="submit" variant="outline-dark">Add</Button>
                     </Form>

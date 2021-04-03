@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { isWebUri } from 'valid-url';
 import { useAuth } from '../../contexts/AuthContext';
 import { create } from '../../services/carsService';
