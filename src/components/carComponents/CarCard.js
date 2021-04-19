@@ -7,7 +7,7 @@ export default function CarCard({ carId, model, year, price, imageUrl }) {
 
     return (
         <>
-            <Link to={`/cars/details/${carId}`} className="col-4 mb-4 carCard">
+            <Link to={`/cars/details/${carId}`} className="col-lg-4 col-md-6 col-sm-12 mb-4 carCard">
                 <Card>
                     <div className="carCardImgWrap">
                         <Card.Img variant="top" src={imageUrl} className="carCardImg" />

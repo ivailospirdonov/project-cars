@@ -27,9 +27,9 @@ export default function Header() {
                         </section>
                         <section className="nav-menu-wrapper">
                             <div className="nav-menu">
-                                <Link to="/" className="btn btn-custom-hover py-3" role="button">Home</Link>
                                 {!currentUser && <Link to="/login" className="btn btn-custom-hover py-3" role="button">Log in</Link>}
                                 {!currentUser && <Link to="/signup" className="btn btn-custom-hover py-3" role="button">Sign Up</Link>}
+                                {currentUser && <Link to="/" className="btn btn-custom-hover py-3" role="button">Home</Link>}
                                 {currentUser && <button className="btn py-3" role="button" onClick={handleLogout}>Log out</button>}
                             </div>
                         </section>
