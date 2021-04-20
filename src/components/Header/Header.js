@@ -9,6 +9,11 @@ export default function Header() {
     const { logout, currentUser } = useAuth();
     const history = useHistory();
 
+    function handleMenuToggle(){
+        const navUl = document.getElementById('nav-menu-wrapper');
+        navUl.classList.toggle('show');
+    }
+
     async function handleLogout() {
         try {
             await logout();
@@ -25,7 +30,8 @@ export default function Header() {
                         <section className="nav-logo-section">
                             <Link to="/" ><h3>Project Cars</h3></Link>
                         </section>
-                        <section className="nav-menu-wrapper">
+                        <button className="hamburger" id="hamburger" onClick={handleMenuToggle}><i className="fa fa-bars" aria-hidden="true"></i></button>
+                        <section className="nav-menu-wrapper" id="nav-menu-wrapper">
                             <div className="nav-menu">
                                 {!currentUser && <Link to="/login" className="btn btn-custom-hover py-3" role="button">Log in</Link>}
                                 {!currentUser && <Link to="/signup" className="btn btn-custom-hover py-3" role="button">Sign Up</Link>}
@@ -56,6 +62,17 @@ export default function Header() {
                     justify-content: space-between;
                     margin: auto;
                 }
+
+                .hamburger{
+                    background-color: transparent;
+                    border: 0;
+                    cursor: pointer;
+                    display: none;
+                    color: ${colors.color};
+                    font-size: 30px;
+                }
+
+
                 .nav-menu > a,
                 .nav-menu > .btn{
                     font-weight: 600;
@@ -78,6 +95,16 @@ export default function Header() {
 
                 .nav-menu-wrapper{
                     align-self: center;
+                }
+
+                @media screen and (max-width: 767px){
+                    .hamburger{
+                        display: block;
+                    }
+
+                    .nav-menu-wrapper{
+                        display: none;
+                    }
                 }
             `}</style>
         </>
