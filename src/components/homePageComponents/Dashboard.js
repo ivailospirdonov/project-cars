@@ -72,10 +72,10 @@ export default function Dashboard() {
                 </div>
                 <hr></hr>
                 <div className="row w-100 mx-auto my-4" >
-                    <div className="align-text-center col">
+                    <div className="align-text-center text-center text-sm-left col-12 col-sm-6 mb-4 mb-sm-0">
                         <h2>All cars</h2>
                     </div>
-                    <div className="col d-flex justify-content-end addCarBtn">
+                    <div className="col d-flex justify-content-center justify-content-sm-end addCarBtn">
                         <Link to="/cars/create-car" className="btn btn-outline-dark btn-lg" role="button">Add Project Car</Link>
                     </div>
                 </div>
@@ -141,6 +141,12 @@ export default function Dashboard() {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
+                }
+
+                @media screen and (max-width: 576px) {
+                    .carouselImgWrap {
+                        padding-top: calc( (4 / 9) * 100%);
+                    }
                 }
 
             `}</style>
