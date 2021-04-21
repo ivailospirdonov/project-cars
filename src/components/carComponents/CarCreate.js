@@ -19,8 +19,20 @@ export default function CarCreate() {
     async function handleSubmit(e) {
         e.preventDefault()
 
+        if(modelRef.current.value.length > 20){
+            return setError('The model name should be less than 20 symbols long!');
+        }
+
+        if(yearRef.current.value.length != 4){
+            return setError('Invalid year!');
+        }
+
+        if(priceRef.current.value.length > 8){
+            return setError('The price should be less than 8 symbols long!');
+        }
+
         if (!isWebUri(imageUrlRef.current.value)) {
-            return setError('Not a valid url.');
+            return setError('Not a valid url!');
         }
 
         try {

@@ -41,12 +41,12 @@ export default function CarDetails({ match }) {
                 <Card>
                     <Card.Body>
                         <div className="row d-flex justify-content-center">
-                            <div className="col-12 col-md-7">
+                            <div className="col-12 col-lg-7">
                                 <div className="carDetailsWrap" >
                                     <Image src={car.imageUrl} alt="Car Wallpaper" />
                                 </div>
                             </div>
-                            <div className="col-12 col-md-5">
+                            <div className="col-12 col-lg-5">
                                 <h1>{car.model}</h1>
                                 <h4>Year: {car.year}</h4>
                                 <h4>Price: {car.price}lv.</h4>
@@ -152,7 +152,7 @@ export default function CarDetails({ match }) {
                     color: ${colors.color};
                 }
 
-                @media screen and (max-width: 767px){
+                @media screen and (max-width: 992px){
                     .carDetailsBtns{
                         position: relative;
                         width: 100%
