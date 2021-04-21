@@ -41,12 +41,12 @@ export default function CarDetails({ match }) {
                 <Card>
                     <Card.Body>
                         <div className="row d-flex justify-content-center">
-                            <div className="col-7">
+                            <div className="col-12 col-md-7">
                                 <div className="carDetailsWrap" >
                                     <Image src={car.imageUrl} alt="Car Wallpaper" />
                                 </div>
                             </div>
-                            <div className="col-5">
+                            <div className="col-12 col-md-5">
                                 <h1>{car.model}</h1>
                                 <h4>Year: {car.year}</h4>
                                 <h4>Price: {car.price}lv.</h4>
@@ -61,8 +61,8 @@ export default function CarDetails({ match }) {
                         <div className="partsSection">
                             <h2 className="d-flex justify-content-center mb-4">Car Parts</h2>
                             <div className="row d-flex justify-content-around">
-                                <div className="col-6">
-                                    <h4 className="mb-3">Owned Parts:</h4>
+                                <div className="col-12 col-md-6 mt-5 mt-md-0">
+                                    <h4 className="mb-5 mb-md-2">Owned Parts:</h4>
                                     <div id="ownedUl">
                                         {parts.filter(part => part[1].ownedCheck === true).map(part =>
                                             <PartCard
@@ -77,8 +77,8 @@ export default function CarDetails({ match }) {
                                             {parts.length == 0 && <h4>No parts added yet!</h4>}
                                     </div>
                                 </div>
-                                <div className="col-6">
-                                    <h4 className="mb-3">Unowned Parts:</h4>
+                                <div className="col-12 col-md-6 mt-5 mt-md-0">
+                                    <h4 className="mb-5 mb-md-2">Unowned Parts:</h4>
                                     <div>
                                         {parts.filter(part => part[1].ownedCheck === false).map(part =>
                                             <PartCard
@@ -150,6 +150,13 @@ export default function CarDetails({ match }) {
                 .partsSection h2,
                 .partsSection h4{
                     color: ${colors.color};
+                }
+
+                @media screen and (max-width: 767px){
+                    .carDetailsBtns{
+                        position: relative;
+                        width: 100%
+                    }
                 }
             `}</style>
         </>
