@@ -12,6 +12,11 @@ export default function Header() {
     function handleMenuToggle(){
         const navUl = document.getElementById('nav-menu-wrapper');
         navUl.classList.toggle('show');
+        if(navUl.className == "nav-menu-wrapper show"){
+            navUl.style.display = "flex";
+        }else{
+            navUl.style.display = "none";
+        }
     }
 
     async function handleLogout() {
@@ -59,6 +64,7 @@ export default function Header() {
                 }
                 .navbar{
                     display: flex;
+                    flex-wrap: wrap;
                     justify-content: space-between;
                     margin: auto;
                 }
@@ -104,6 +110,14 @@ export default function Header() {
 
                     .nav-menu-wrapper{
                         display: none;
+                        justify-content: center;
+                        width: 100%;
+                    }
+
+                    .nav-menu-wrapper .nav-menu{
+                        display: flex;
+                        width: 100%;
+                        flex-direction: column;
                     }
                 }
             `}</style>
