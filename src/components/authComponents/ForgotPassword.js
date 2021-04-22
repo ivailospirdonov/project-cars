@@ -43,10 +43,10 @@ export default function ForgotPassword() {
                     </Form>
                     <hr></hr>
                     <div className="w-100 text-center mt-2">
-                        <Link to="/login">Login</Link>
+                        <Link to="/project-cars/login">Login</Link>
                     </div>
                     <div className="w-100 text-center mt-2">
-                        Need an account? <Link to="/signup">Sign up</Link>
+                        Need an account? <Link to="/project-cars/signup">Sign up</Link>
                     </div>
                 </Card.Body>
             </Card>

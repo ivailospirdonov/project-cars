@@ -24,7 +24,7 @@ export default function Signup() {
             setError('');
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
-            history.push('/');
+            history.push('/project-cars');
         } catch {
             setError('Failed to create an account!')
         }
@@ -54,7 +54,7 @@ export default function Signup() {
                         <Button disabled={loading} className="w-100 signUpCardBtn" type="submit" variant="outline-dark">Sign Up</Button>
                     </Form>
                     <div className="w-100 text-center mt-2">
-                        Already have an account? <Link to="/login">Log In</Link>
+                        Already have an account? <Link to="/project-cars/login">Log In</Link>
                     </div>
                 </Card.Body>
             </Card>

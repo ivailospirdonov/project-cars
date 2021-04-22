@@ -41,7 +41,7 @@ export default function CarEdit({ match }) {
                 imageUrlRef.current.value,
                 match.params.carId
             );
-            history.push(`/cars/details/${match.params.carId}`);
+            history.push(`/project-cars/cars/details/${match.params.carId}`);
         } catch {
             setError('Failed to edit a project car!')
         }

@@ -45,7 +45,7 @@ export default function CarCreate() {
                 imageUrlRef.current.value,
                 currentUser.uid
             );
-            history.push('/');
+            history.push('/project-cars');
         } catch {
             setError('Failed to create a project car!')
         }

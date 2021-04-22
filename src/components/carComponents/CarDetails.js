@@ -29,7 +29,7 @@ export default function CarDetails({ match }) {
     async function handleCarDelete() {
         try {
             await deleteCar(match.params.carId);
-            history.push('/');
+            history.push('/project-cars');
         } catch {
 
         }
@@ -51,8 +51,8 @@ export default function CarDetails({ match }) {
                                 <h4>Year: {car.year}</h4>
                                 <h4>Price: {car.price}lv.</h4>
                                 <div className="carDetailsBtns w-90 d-flex justify-content-center btn-group" role="group">
-                                    <Link to={`/cars/edit/${match.params.carId}`} className="btn btn-secondary btn-custom-hover col-4" role="button">Edit</Link>
-                                    <Link to={`/cars/add-part/${match.params.carId}`} className="btn btn-dark btn-custom-hover col-4" role="button">Add part</Link>
+                                    <Link to={`/project-cars/cars/edit/${match.params.carId}`} className="btn btn-secondary btn-custom-hover col-4" role="button">Edit</Link>
+                                    <Link to={`/project-cars/cars/add-part/${match.params.carId}`} className="btn btn-dark btn-custom-hover col-4" role="button">Add part</Link>
                                     <button className="btn btn-danger col-4" role="button" onClick={handleCarDelete}>Delete</button>
                                 </div>
                             </div>

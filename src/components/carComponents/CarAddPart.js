@@ -37,7 +37,7 @@ export default function CarAddPart({ match }) {
                 shopUrlRef.current.value,
                 checked
             );
-            history.push(`/cars/details/${match.params.carId}`);
+            history.push(`/project-cars/cars/details/${match.params.carId}`);
         } catch {
             setError('Failed to add a part!')
         }

@@ -76,7 +76,7 @@ export default function Dashboard() {
                         <h2>All cars</h2>
                     </div>
                     <div className="col d-flex justify-content-center justify-content-sm-end addCarBtn">
-                        <Link to="/cars/create-car" className="btn btn-outline-dark btn-lg" role="button">Add Project Car</Link>
+                        <Link to="/project-cars/cars/create-car" className="btn btn-outline-dark btn-lg" role="button">Add Project Car</Link>
                     </div>
                 </div>
                 <div className="row w-100 mx-auto">

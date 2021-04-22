@@ -22,7 +22,7 @@ export default function Header() {
     async function handleLogout() {
         try {
             await logout();
-            history.push('/login');
+            history.push('/project-cars/login');
         } catch {
         }
     }
@@ -33,14 +33,14 @@ export default function Header() {
                 <Container>
                     <nav className="navbar p-0">
                         <section className="nav-logo-section">
-                            <Link to="/" ><h3>Project Cars</h3></Link>
+                            <Link to="/project-cars" ><h3>Project Cars</h3></Link>
                         </section>
                         <button className="hamburger" id="hamburger" onClick={handleMenuToggle}><i className="fa fa-bars" aria-hidden="true"></i></button>
                         <section className="nav-menu-wrapper" id="nav-menu-wrapper">
                             <div className="nav-menu">
-                                {!currentUser && <Link to="/login" className="btn btn-custom-hover py-3" role="button">Log in</Link>}
-                                {!currentUser && <Link to="/signup" className="btn btn-custom-hover py-3" role="button">Sign Up</Link>}
-                                {currentUser && <Link to="/" className="btn btn-custom-hover py-3" role="button">Home</Link>}
+                                {!currentUser && <Link to="/project-cars/login" className="btn btn-custom-hover py-3" role="button">Log in</Link>}
+                                {!currentUser && <Link to="/project-cars/signup" className="btn btn-custom-hover py-3" role="button">Sign Up</Link>}
+                                {currentUser && <Link to="/project-cars" className="btn btn-custom-hover py-3" role="button">Home</Link>}
                                 {currentUser && <button className="btn py-3" role="button" onClick={handleLogout}>Log out</button>}
                             </div>
                         </section>
