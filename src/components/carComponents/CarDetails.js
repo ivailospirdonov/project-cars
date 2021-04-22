@@ -60,39 +60,41 @@ export default function CarDetails({ match }) {
                         <hr></hr>
                         <div className="partsSection">
                             <h2 className="d-flex justify-content-center mb-4">Car Parts</h2>
-                            <div className="row d-flex justify-content-around">
-                                <div className="col-12 col-md-6 mt-5 mt-md-0">
-                                    <h4 className="mb-5 mb-md-2">Owned Parts:</h4>
-                                    <div id="ownedUl">
-                                        {parts.filter(part => part[1].ownedCheck === true).map(part =>
-                                            <PartCard
-                                                key={part[0]}
-                                                carId={match.params.carId}
-                                                partId={part[0]}
-                                                name={part[1].name}
-                                                price={part[1].price}
-                                                shopUrl={part[1].shopUrl}
-                                                ownedCheck={part[1].ownedCheck}
-                                            />)}
-                                            {parts.length == 0 && <h4>No parts added yet!</h4>}
+                            {parts.length == 0 && <h4>No parts added yet!</h4>}
+                            {parts.length > 0 &&
+                                <div className="row d-flex justify-content-around">
+                                    <div className="col-12 col-md-6 mt-5 mt-md-0">
+                                        <h4 className="mb-5 mb-md-2">Owned Parts:</h4>
+                                        <div id="ownedUl">
+                                            {parts.filter(part => part[1].ownedCheck === true).map(part =>
+                                                <PartCard
+                                                    key={part[0]}
+                                                    carId={match.params.carId}
+                                                    partId={part[0]}
+                                                    name={part[1].name}
+                                                    price={part[1].price}
+                                                    shopUrl={part[1].shopUrl}
+                                                    ownedCheck={part[1].ownedCheck}
+                                                />)}
+                                        </div>
+                                    </div>
+                                    <div className="col-12 col-md-6 mt-5 mt-md-0">
+                                        <h4 className="mb-5 mb-md-2">Unowned Parts:</h4>
+                                        <div>
+                                            {parts.filter(part => part[1].ownedCheck === false).map(part =>
+                                                <PartCard
+                                                    key={part[0]}
+                                                    carId={match.params.carId}
+                                                    partId={part[0]}
+                                                    name={part[1].name}
+                                                    price={part[1].price}
+                                                    shopUrl={part[1].shopUrl}
+                                                    ownedCheck={part[1].ownedCheck}
+                                                />)}
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="col-12 col-md-6 mt-5 mt-md-0">
-                                    <h4 className="mb-5 mb-md-2">Unowned Parts:</h4>
-                                    <div>
-                                        {parts.filter(part => part[1].ownedCheck === false).map(part =>
-                                            <PartCard
-                                                key={part[0]}
-                                                carId={match.params.carId}
-                                                partId={part[0]}
-                                                name={part[1].name}
-                                                price={part[1].price}
-                                                shopUrl={part[1].shopUrl}
-                                                ownedCheck={part[1].ownedCheck}
-                                            />)}
-                                    </div>
-                                </div>
-                            </div>
+                            }
                         </div>
                     </Card.Body>
                 </Card>
