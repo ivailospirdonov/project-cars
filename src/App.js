@@ -35,6 +35,7 @@ function App() {
                       <PrivateRoute exact path="/cars/add-part/:carId" component={CarAddPart} />
                       <Route exact path="/signup" component={Signup} />
                       <Route exact path="/login" component={Login} />
+                      <Route exact path="/project-cars" component={Login} />
                       <Route exact path="/forgot-password" component={ForgotPassword} />
                       <Route component={NotFound} />
                     </Switch>
