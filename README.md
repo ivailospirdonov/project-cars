@@ -1,10 +1,9 @@
 # Project cars
 
-Project cars is a react application created to help people with their car builds so they can create and edit cars, making them projects with adding list of modifications that they want to do or have already done.
-
-# Getting Started with Project Cars App
-
 This is a react application for the client-side and it uses Firebase for the server-side.
+
+Project cars is an application created to help people with their car builds so they can create and edit cars, making them projects with adding list of modifications that they want to do or have already done.
+
 
 ## Authentication
 
