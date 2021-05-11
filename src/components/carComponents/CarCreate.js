@@ -18,8 +18,14 @@ export default function CarCreate() {
     const [loading, setLoading] = useState(false);
     const [percentage, setPercentage] = useState(0);
     const history = useHistory();
-    const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
+    async function onDrop(acceptedFiles) {
+
+        await uploadFile(acceptedFiles[0]);
+        setLoading(false);
+    }
+
+    const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -59,12 +65,17 @@ export default function CarCreate() {
     }
 
     async function handleOnUpload(e) {
+        await uploadFile(e.target.files[0]);
+        setLoading(false);
+    }
 
-        const file = e.target.files[0];
+    function uploadFile(file) {
+        const imgFile = file;
+        console.log(file);
         setReviewLink('');
         setLoading(true);
         const imageId = uuid();
-        const imagesRef = firebaseConfig.storage().ref("images").child(imageId).put(file);
+        const imagesRef = firebaseConfig.storage().ref("images").child(imageId).put(imgFile);
         imagesRef.on(
             "state_changed",
             (snapshot) => {
@@ -72,8 +83,8 @@ export default function CarCreate() {
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                 );
                 setPercentage(progress);
-                if(progress === 100){
-                    setTimeout(() =>{
+                if (progress === 100) {
+                    setTimeout(() => {
                         setPercentage(0);
                         firebaseConfig.storage().ref("images").child(imageId).getDownloadURL().then((url) => {
                             setReviewLink(url);
@@ -82,8 +93,6 @@ export default function CarCreate() {
                 }
             },
         );
-        
-        setLoading(false);
     }
 
 
@@ -111,13 +120,17 @@ export default function CarCreate() {
                             <section>
                                 <div {...getRootProps({ className: 'dropzone' })}>
                                     <input {...getInputProps()} accept="image/*" onChange={handleOnUpload} />
-                                    <p className="btn imageBtn w-100">Click to select an image</p>
+                                    {
+                                        isDragActive ?
+                                            <p className="btn imageBtn w-100 py-4">Drop the files here ...</p> :
+                                            <p className="btn imageBtn w-100 py-4">Drag and drop file here or click to select a file</p>
+                                    }
                                 </div>
                                 <aside>
-                                    {reviewLink && <a href={reviewLink} className="btn imageBtn" target="_blank" role="button">Preview link</a>}
+                                    {reviewLink && <a href={reviewLink} className="btn previewBtn" target="_blank" role="button">Preview link</a>}
                                 </aside>
                             </section>
-                            {percentage > 0 && <ProgressBar className="imgProgressBar" animated now={percentage}/>}
+                            {percentage > 0 && <ProgressBar className="imgProgressBar" animated now={percentage} />}
                         </Form.Group>
                         <Button disabled={loading} className="w-100 carCreateCardBtn" type="submit">Create</Button>
                     </Form>
@@ -142,6 +155,11 @@ export default function CarCreate() {
 
                 .imageBtn{
                     background: transparent;
+                    border-style: dashed;
+                }
+
+                .previewBtn{
+                    background: transparent;
                 }
 
                 .imgProgressBar{
@@ -149,14 +167,16 @@ export default function CarCreate() {
                 }
 
                 .carCreateCardBtn,
-                .imageBtn{
+                .imageBtn,
+                .previewBtn{
                     border-color: ${colors.color};
                     background-color: ${colors.backgroundColor};
                     color:  ${colors.color};
                 }
 
                 .carCreateCardBtn:hover,
-                .imageBtn:hover{
+                .imageBtn:hover,
+                .previewBtn:hover{
                     background-color: #000;
                     border-color: ${colors.color};
                     color: #fff;
