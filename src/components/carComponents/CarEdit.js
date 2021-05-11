@@ -5,6 +5,9 @@ import { isWebUri } from 'valid-url';
 import { editCar } from '../../services/carsService';
 import { getOneCar } from '../../services/carsService';
 import { colors } from '../../styles/colors';
+import { useDropzone } from 'react-dropzone';
+import firebaseConfig from '../../firebase';
+import { v4 as uuid } from "uuid";
 
 export default function CarEdit({ match }) {
     const modelRef = useRef();
@@ -13,8 +16,10 @@ export default function CarEdit({ match }) {
     const imageUrlRef = useRef();
     const [error, setError] = useState('');
     const [car, setCar] = useState('');
+    const [reviewLink, setReviewLink] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+    const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
     useEffect(() => {
         async function getCurrentCar() {
@@ -27,8 +32,20 @@ export default function CarEdit({ match }) {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        if (!isWebUri(imageUrlRef.current.value)) {
-            return setError('Not a valid url.');
+        if (modelRef.current.value.length > 20) {
+            return setError('The model name should be less than 20 symbols long!');
+        }
+
+        if (yearRef.current.value.length != 4) {
+            return setError('Invalid year!');
+        }
+
+        if (priceRef.current.value.length > 8) {
+            return setError('The price should be less than 8 symbols long!');
+        }
+
+        if (!reviewLink.length > 0) {
+            return setError('Not a valid image!');
         }
 
         try {
@@ -38,7 +55,7 @@ export default function CarEdit({ match }) {
                 modelRef.current.value,
                 yearRef.current.value,
                 priceRef.current.value,
-                imageUrlRef.current.value,
+                reviewLink,
                 match.params.carId
             );
             history.push(`/project-cars/cars/details/${match.params.carId}`);
@@ -47,6 +64,18 @@ export default function CarEdit({ match }) {
         }
         setLoading(false);
 
+    }
+
+    async function handleOnUpload(e) {
+        const file = e.target.files[0];
+        setLoading(true);
+        const imageId = uuid();
+        const imagesRef = firebaseConfig.storage().ref("images").child(imageId);
+        await imagesRef.put(file);
+        imagesRef.getDownloadURL().then((url) => {
+            setReviewLink(url);
+        });
+        setLoading(false);
     }
 
     return (
@@ -69,8 +98,16 @@ export default function CarEdit({ match }) {
                             <Form.Control type="number" ref={priceRef} defaultValue={car.price} required />
                         </Form.Group>
                         <Form.Group id="imageUrl">
-                            <Form.Label>Image URL</Form.Label>
-                            <Form.Control type="text" ref={imageUrlRef} defaultValue={car.imageUrl} required />
+                            <Form.Label>Image</Form.Label>
+                            <section>
+                                <div {...getRootProps({ className: 'dropzone' })}>
+                                    <input {...getInputProps()} accept="image/*" onChange={handleOnUpload} />
+                                    <p className="btn imageBtn w-100">Click to select an image</p>
+                                </div>
+                                <aside>
+                                    {reviewLink && <a href={reviewLink} className="btn imageBtn" role="button">Preview link</a>} 
+                                </aside>
+                            </section>
                         </Form.Group>
                         <Button disabled={loading} className="w-100 carEditCardBtn" type="submit" variant="outline-dark">Edit</Button>
                     </Form>
@@ -93,14 +130,21 @@ export default function CarEdit({ match }) {
                     color: #fff;
                 }
 
-                .carEditCardBtn{
+                .imageBtn{
+                    background: transparent;
+                }
+
+                .carEditCardBtn,
+                .imageBtn{
                     border-color: ${colors.color};
                     background-color: ${colors.backgroundColor};
                     color:  ${colors.color};
                 }
-                .carEditCardBtn:hover{
+                .carEditCardBtn:hover,
+                .imageBtn:hover{
                     background-color: #000;
                     border-color: ${colors.color};
+                    color: #fff;
                 }
 
             `}</style>
