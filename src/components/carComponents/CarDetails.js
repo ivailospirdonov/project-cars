@@ -27,11 +27,10 @@ export default function CarDetails({ match }) {
     }, []);
 
     async function handleCarDelete() {
-        try {
+        const result = window.confirm("Are you sure you want to delete the project car?");
+        if(result == true){
             await deleteCar(match.params.carId);
             history.push('/project-cars');
-        } catch {
-
         }
     }
 
