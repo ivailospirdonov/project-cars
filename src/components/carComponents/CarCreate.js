@@ -65,13 +65,17 @@ export default function CarCreate() {
     }
 
     async function handleOnUpload(e) {
+        
         await uploadFile(e.target.files[0]);
         setLoading(false);
     }
 
     function uploadFile(file) {
         const imgFile = file;
-        console.log(file);
+        if (reviewLink) {
+            let pictureRef = firebaseConfig.storage().refFromURL(reviewLink);
+            pictureRef.delete();
+        }
         setReviewLink('');
         setLoading(true);
         const imageId = uuid();

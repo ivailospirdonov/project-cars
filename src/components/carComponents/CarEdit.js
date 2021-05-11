@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Form, Button, Card, Alert } from 'react-bootstrap';
+import { Form, Button, Card, Alert, ProgressBar } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { editCar } from '../../services/carsService';
 import { getOneCar } from '../../services/carsService';
@@ -16,13 +16,22 @@ export default function CarEdit({ match }) {
     const [car, setCar] = useState('');
     const [reviewLink, setReviewLink] = useState('');
     const [loading, setLoading] = useState(false);
+    const [percentage, setPercentage] = useState(0);
     const history = useHistory();
-    const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+
+    async function onDrop(acceptedFiles) {
+
+        await uploadFile(acceptedFiles[0]);
+        setLoading(false);
+    }
+
+    const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     useEffect(() => {
         async function getCurrentCar() {
             let result = await getOneCar(match.params.carId);
             setCar(result);
+            setReviewLink(car.imageUrl);
         }
         getCurrentCar();
     }, []);
@@ -42,10 +51,6 @@ export default function CarEdit({ match }) {
             return setError('The price should be less than 8 symbols long!');
         }
 
-        if (!reviewLink.length > 0) {
-            return setError('Not a valid image!');
-        }
-
         try {
             setError('');
             setLoading(true);
@@ -53,7 +58,7 @@ export default function CarEdit({ match }) {
                 modelRef.current.value,
                 yearRef.current.value,
                 priceRef.current.value,
-                reviewLink,
+                reviewLink ? reviewLink : car.imageUrl,
                 match.params.carId
             );
             history.push(`/project-cars/cars/details/${match.params.carId}`);
@@ -65,15 +70,40 @@ export default function CarEdit({ match }) {
     }
 
     async function handleOnUpload(e) {
-        const file = e.target.files[0];
+
+        await uploadFile(e.target.files[0]);
+        setLoading(false);
+    }
+
+    function uploadFile(file) {
+        const imgFile = file;
+        if (reviewLink) {
+            let pictureRef = firebaseConfig.storage().refFromURL(reviewLink);
+            pictureRef.delete();
+        } else {
+            let pictureRef = firebaseConfig.storage().refFromURL(car.imageUrl);
+            pictureRef.delete();
+        }
         setLoading(true);
         const imageId = uuid();
-        const imagesRef = firebaseConfig.storage().ref("images").child(imageId);
-        await imagesRef.put(file);
-        imagesRef.getDownloadURL().then((url) => {
-            setReviewLink(url);
-        });
-        setLoading(false);
+        const imagesRef = firebaseConfig.storage().ref("images").child(imageId).put(imgFile);
+        imagesRef.on(
+            "state_changed",
+            (snapshot) => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                setPercentage(progress);
+                if (progress === 100) {
+                    setTimeout(() => {
+                        setPercentage(0);
+                        firebaseConfig.storage().ref("images").child(imageId).getDownloadURL().then((url) => {
+                            setReviewLink(url);
+                        });
+                    }, 1000)
+                }
+            },
+        );
     }
 
     return (
@@ -100,12 +130,17 @@ export default function CarEdit({ match }) {
                             <section>
                                 <div {...getRootProps({ className: 'dropzone' })}>
                                     <input {...getInputProps()} accept="image/*" onChange={handleOnUpload} />
-                                    <p className="btn imageBtn w-100">Click to select an image</p>
+                                    {
+                                        isDragActive ?
+                                            <p className="btn imageBtn w-100 py-4">Drop the files here ...</p> :
+                                            <p className="btn imageBtn w-100 py-4">Drag and drop file here or click to select a file</p>
+                                    }
                                 </div>
                                 <aside>
-                                    {reviewLink && <a href={reviewLink} className="btn imageBtn" target="_blank" role="button">Preview link</a>} 
+                                    <a href={reviewLink ? reviewLink : car.imageUrl} className="btn previewBtn" target="_blank" role="button">Preview link</a>
                                 </aside>
                             </section>
+                            {percentage > 0 && <ProgressBar className="imgProgressBar mt-2" animated now={percentage} />}
                         </Form.Group>
                         <Button disabled={loading} className="w-100 carEditCardBtn" type="submit" variant="outline-dark">Edit</Button>
                     </Form>
@@ -130,16 +165,23 @@ export default function CarEdit({ match }) {
 
                 .imageBtn{
                     background: transparent;
+                    border-style: dashed;
+                }
+
+                .previewBtn{
+                    background: transparent;
                 }
 
                 .carEditCardBtn,
-                .imageBtn{
+                .imageBtn,
+                .previewBtn{
                     border-color: ${colors.color};
                     background-color: ${colors.backgroundColor};
                     color:  ${colors.color};
                 }
                 .carEditCardBtn:hover,
-                .imageBtn:hover{
+                .imageBtn:hover,
+                .previewBtn:hover{
                     background-color: #000;
                     border-color: ${colors.color};
                     color: #fff;
