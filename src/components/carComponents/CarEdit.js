@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { isWebUri } from 'valid-url';
 import { editCar } from '../../services/carsService';
 import { getOneCar } from '../../services/carsService';
 import { colors } from '../../styles/colors';
@@ -13,7 +12,6 @@ export default function CarEdit({ match }) {
     const modelRef = useRef();
     const yearRef = useRef();
     const priceRef = useRef();
-    const imageUrlRef = useRef();
     const [error, setError] = useState('');
     const [car, setCar] = useState('');
     const [reviewLink, setReviewLink] = useState('');

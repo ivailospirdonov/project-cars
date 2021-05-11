@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Form, Button, Card, Alert } from 'react-bootstrap';
+import { Form, Button, Card, Alert, ProgressBar } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { create } from '../../services/carsService';
@@ -16,6 +16,7 @@ export default function CarCreate() {
     const [error, setError] = useState('');
     const [reviewLink, setReviewLink] = useState('');
     const [loading, setLoading] = useState(false);
+    const [percentage, setPercentage] = useState(0);
     const history = useHistory();
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
@@ -58,14 +59,30 @@ export default function CarCreate() {
     }
 
     async function handleOnUpload(e) {
+
         const file = e.target.files[0];
+        setReviewLink('');
         setLoading(true);
         const imageId = uuid();
-        const imagesRef = firebaseConfig.storage().ref("images").child(imageId);
-        await imagesRef.put(file);
-        imagesRef.getDownloadURL().then((url) => {
-            setReviewLink(url);
-        });
+        const imagesRef = firebaseConfig.storage().ref("images").child(imageId).put(file);
+        imagesRef.on(
+            "state_changed",
+            (snapshot) => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                setPercentage(progress);
+                if(progress === 100){
+                    setTimeout(() =>{
+                        setPercentage(0);
+                        firebaseConfig.storage().ref("images").child(imageId).getDownloadURL().then((url) => {
+                            setReviewLink(url);
+                        });
+                    }, 1000)
+                }
+            },
+        );
+        
         setLoading(false);
     }
 
@@ -97,9 +114,10 @@ export default function CarCreate() {
                                     <p className="btn imageBtn w-100">Click to select an image</p>
                                 </div>
                                 <aside>
-                                    {reviewLink && <a href={reviewLink} className="btn imageBtn" target="_blank" role="button">Preview link</a>} 
+                                    {reviewLink && <a href={reviewLink} className="btn imageBtn" target="_blank" role="button">Preview link</a>}
                                 </aside>
                             </section>
+                            {percentage > 0 && <ProgressBar className="imgProgressBar" animated now={percentage}/>}
                         </Form.Group>
                         <Button disabled={loading} className="w-100 carCreateCardBtn" type="submit">Create</Button>
                     </Form>
@@ -124,6 +142,10 @@ export default function CarCreate() {
 
                 .imageBtn{
                     background: transparent;
+                }
+
+                .imgProgressBar{
+                    background-color: ${colors.backgroundColor};
                 }
 
                 .carCreateCardBtn,
