@@ -97,7 +97,7 @@ export default function CarCreate() {
                                     <p className="btn imageBtn w-100">Click to select an image</p>
                                 </div>
                                 <aside>
-                                    {reviewLink && <a href={reviewLink} className="btn imageBtn" role="button">Preview link</a>} 
+                                    {reviewLink && <a href={reviewLink} className="btn imageBtn" target="_blank" role="button">Preview link</a>} 
                                 </aside>
                             </section>
                         </Form.Group>
